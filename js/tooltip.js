@@ -86,7 +86,9 @@
     var defaults = this.getDefaults()
 
     this._options && $.each(this._options, function (key, value) {
-      if (defaults[key] !== value) options[key] = value
+      if (defaults[key] !== value) {
+        options[key] = value
+      }
     })
 
     return options
@@ -100,10 +102,14 @@
 
     self.hoverState = 'in'
 
-    if (!self.options.delay || !self.options.delay.show) return self.show()
+    if (!self.options.delay || !self.options.delay.show) {
+      return self.show()
+    }
 
     self.timeout = setTimeout(function () {
-      if (self.hoverState === 'in') self.show()
+      if (self.hoverState === 'in') {
+        self.show()
+      }
     }, self.options.delay.show)
   }
 
@@ -115,10 +121,14 @@
 
     self.hoverState = 'out'
 
-    if (!self.options.delay || !self.options.delay.hide) return self.hide()
+    if (!self.options.delay || !self.options.delay.hide) {
+      return self.hide()
+    }
 
     self.timeout = setTimeout(function () {
-      if (self.hoverState === 'out') self.hide()
+      if (self.hoverState === 'out') {
+        self.hide()
+      }
     }, self.options.delay.hide)
   }
 
@@ -128,14 +138,18 @@
     if (this.hasContent() && this.enabled) {
       this.$element.trigger(e)
 
-      if (e.isDefaultPrevented()) return
+      if (e.isDefaultPrevented()) {
+        return
+      }
       var that = this;
 
       var $tip = this.tip()
 
       this.setContent()
 
-      if (this.options.animation) $tip.addClass('fade')
+      if (this.options.animation) {
+        $tip.addClass('fade')
+      }
 
       var placement = typeof this.options.placement === 'function' ?
         this.options.placement.call(this, $tip[0], this.$element[0]) :
@@ -143,7 +157,9 @@
 
       var autoToken = /\s?auto?\s?/i
       var autoPlace = autoToken.test(placement)
-      if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
+      if (autoPlace) {
+        placement = placement.replace(autoToken, '') || 'top'
+      }
 
       $tip
         .detach()
@@ -204,8 +220,12 @@
     var marginLeft = parseInt($tip.css('margin-left'), 10)
 
     // we must check for NaN for ie 8/9
-    if (isNaN(marginTop))  marginTop  = 0
-    if (isNaN(marginLeft)) marginLeft = 0
+    if (isNaN(marginTop)) {
+      marginTop = 0
+    }
+    if (isNaN(marginLeft)) {
+      marginLeft = 0
+    }
 
     offset.top  = offset.top  + marginTop
     offset.left = offset.left + marginLeft
@@ -250,7 +270,9 @@
       this.replaceArrow(actualHeight - height, actualHeight, 'top')
     }
 
-    if (replace) $tip.offset(offset)
+    if (replace) {
+      $tip.offset(offset)
+    }
   }
 
   Tooltip.prototype.replaceArrow = function (delta, dimension, position) {
@@ -271,13 +293,17 @@
     var e    = $.Event('hide.bs.' + this.type)
 
     function complete() {
-      if (that.hoverState !== 'in') $tip.detach()
+      if (that.hoverState !== 'in') {
+        $tip.detach()
+      }
       that.$element.trigger('hidden.bs.' + that.type)
     }
 
     this.$element.trigger(e)
 
-    if (e.isDefaultPrevented()) return
+    if (e.isDefaultPrevented()) {
+      return
+    }
 
     $tip.removeClass('in')
 
@@ -379,9 +405,15 @@
       var data    = $this.data('bs.tooltip')
       var options = typeof option === 'object' && option
 
-      if (!data && option === 'destroy') return
-      if (!data) $this.data('bs.tooltip', (data = new Tooltip(this, options)))
-      if (typeof option === 'string') data[option]()
+      if (!data && option === 'destroy') {
+        return
+      }
+      if (!data) {
+        $this.data('bs.tooltip', (data = new Tooltip(this, options)))
+      }
+      if (typeof option === 'string') {
+        data[option]()
+      }
     })
   }
 
